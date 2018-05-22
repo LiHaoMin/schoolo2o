@@ -35,4 +35,13 @@ public class UserController {
         }
         return new RequestResult(false,"登录失败");
     }
+
+    @RequestMapping("/delete")
+    public RequestResult login(@RequestParam("ids") List<Integer> ids){
+        boolean flag = userService.delete(ids);
+        if(flag){
+            return new RequestResult(true,"删除成功");
+        }
+        return new RequestResult(false,"删除失败");
+    }
 }

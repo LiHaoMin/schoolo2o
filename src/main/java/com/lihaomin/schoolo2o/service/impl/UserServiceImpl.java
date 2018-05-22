@@ -40,4 +40,14 @@ public class UserServiceImpl implements UserService{
             return true;
         return false;
     }
+
+    @Override
+    public boolean delete(List<Integer> ids) {
+        UserExample example = new UserExample();
+        example.or().andIdIn(ids);
+        int rows = userMapper.deleteByExample(example);
+        if(rows > 0)
+            return true;
+        return false;
+    }
 }
