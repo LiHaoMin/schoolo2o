@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lihaomin.schoolo2o.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.lihaomin.schoolo2o.model.Product">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="productDescription" jdbcType="VARCHAR" property="productdescription" />
+    <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail" />
+    <result column="normalPrice" jdbcType="VARCHAR" property="normalprice" />
+    <result column="promotionPrice" jdbcType="VARCHAR" property="promotionprice" />
+    <result column="priority" jdbcType="VARCHAR" property="priority" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="product_category_id" jdbcType="INTEGER" property="productCategoryId" />
+    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, product_name, productDescription, thumbnail, normalPrice, promotionPrice, priority, 
+    status, product_category_id, shop_id, createTime, updateTime
+  </sql>
+  <select id="selectByExample" parameterType="com.lihaomin.schoolo2o.model.ProductExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lihaomin.schoolo2o.model.ProductExample">
+    delete from tb_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lihaomin.schoolo2o.model.Product">
+    insert into tb_product (id, product_name, productDescription, 
+      thumbnail, normalPrice, promotionPrice, 
+      priority, status, product_category_id, 
+      shop_id, createTime, updateTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{productdescription,jdbcType=VARCHAR}, 
+      #{thumbnail,jdbcType=VARCHAR}, #{normalprice,jdbcType=VARCHAR}, #{promotionprice,jdbcType=VARCHAR}, 
+      #{priority,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{productCategoryId,jdbcType=INTEGER}, 
+      #{shopId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lihaomin.schoolo2o.model.Product">
+    insert into tb_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="productdescription != null">
+        productDescription,
+      </if>
+      <if test="thumbnail != null">
+        thumbnail,
+      </if>
+      <if test="normalprice != null">
+        normalPrice,
+      </if>
+      <if test="promotionprice != null">
+        promotionPrice,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="productCategoryId != null">
+        product_category_id,
+      </if>
+      <if test="shopId != null">
+        shop_id,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productdescription != null">
+        #{productdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnail != null">
+        #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="normalprice != null">
+        #{normalprice,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionprice != null">
+        #{promotionprice,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="productCategoryId != null">
+        #{productCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lihaomin.schoolo2o.model.ProductExample" resultType="java.lang.Long">
+    select count(*) from tb_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_product
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.productName != null">
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productdescription != null">
+        productDescription = #{record.productdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thumbnail != null">
+        thumbnail = #{record.thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.normalprice != null">
+        normalPrice = #{record.normalprice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.promotionprice != null">
+        promotionPrice = #{record.promotionprice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priority != null">
+        priority = #{record.priority,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.productCategoryId != null">
+        product_category_id = #{record.productCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopId != null">
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null">
+        updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_product
+    set id = #{record.id,jdbcType=INTEGER},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      productDescription = #{record.productdescription,jdbcType=VARCHAR},
+      thumbnail = #{record.thumbnail,jdbcType=VARCHAR},
+      normalPrice = #{record.normalprice,jdbcType=VARCHAR},
+      promotionPrice = #{record.promotionprice,jdbcType=VARCHAR},
+      priority = #{record.priority,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      product_category_id = #{record.productCategoryId,jdbcType=INTEGER},
+      shop_id = #{record.shopId,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lihaomin.schoolo2o.model.Product">
+    update tb_product
+    <set>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productdescription != null">
+        productDescription = #{productdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnail != null">
+        thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="normalprice != null">
+        normalPrice = #{normalprice,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionprice != null">
+        promotionPrice = #{promotionprice,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="productCategoryId != null">
+        product_category_id = #{productCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null">
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lihaomin.schoolo2o.model.Product">
+    update tb_product
+    set product_name = #{productName,jdbcType=VARCHAR},
+      productDescription = #{productdescription,jdbcType=VARCHAR},
+      thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      normalPrice = #{normalprice,jdbcType=VARCHAR},
+      promotionPrice = #{promotionprice,jdbcType=VARCHAR},
+      priority = #{priority,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      product_category_id = #{productCategoryId,jdbcType=INTEGER},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
