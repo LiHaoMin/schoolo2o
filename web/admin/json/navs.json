@@ -1,0 +1,31 @@
+[{
+	"title" : "首页",
+	"icon" : "&#xe68e;",
+	"href" : "page/main.html",
+	"spread" : false
+},{
+	"title" : "头条管理",
+	"icon" : "&#xe756;",
+	"href" : "page/headlinesManage/list.html",
+	"spread" : false
+},{
+	"title" : "类别管理",
+	"icon" : "&#xe656;",
+	"href" : "page/shopCategoryManage/linksList.html",
+	"spread" : false
+},{
+	"title" : "区域管理",
+	"icon" : "&#xe715;",
+	"href" : "page/areaManage/systemParameter.html",
+	"spread" : false
+},{
+	"title" : "帐号管理",
+	"icon" : "&#xe770;",
+	"href" : "page/userManage/list.html",
+	"spread" : false
+},{
+	"title" : "商铺管理",
+	"icon" : "&#xe653;",
+	"href" : "page/shopManage/images.html",
+	"spread" : false
+}]
