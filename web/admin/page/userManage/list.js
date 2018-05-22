@@ -13,18 +13,19 @@ layui.config({
 			pageTotal:0
 		}
 	});
-	$.get('http://localhost:8080/user/list',function(data){
+	$.get(BASE_URL + '/user/list',function(data){
 		if(data.success){
-			app.dataList = data.data;
+			app.dataList = data.data;			
 			app.pageTotal = data.total;
 			laypage({
 				cont: 'page',
 				pages: app.pageTotal,
 				jump: function(obj){
-					$.get('http://localhost:8080/user/list',{page:obj.curr},function(data){
+					$.get(BASE_URL + '/user/list',{page:obj.curr},function(data){
 						if(data.success){
 							app.dataList = data.data;
 							app.pageTotal = data.total;
+							form.render('checkbox');
 						}
 					});
 				}
@@ -56,26 +57,29 @@ layui.config({
 
 	//批量删除
 	$(".batchDel").click(function(){
-		var $checkbox = $('.layui-table tbody input[type="checkbox"][name="checked"]');
-		var $checked = $('.layui-table tbody input[type="checkbox"][name="checked"]:checked');
+		var $checkbox = $('.layui-table tbody input[type="checkbox"]:not([name="show"])');
+		var $checked = $('.layui-table tbody input[type="checkbox"]:not([name="show"]):checked')
 		if($checkbox.is(":checked")){
 			layer.confirm('确定删除选中的信息？',{icon:3, title:'提示信息'},function(index){
 				var index = layer.msg('删除中，请稍候',{icon: 16,time:false,shade:0.8});
-	            setTimeout(function(){
-	            	//删除数据
-	            	for(var j=0;j<$checked.length;j++){
-	            		for(var i=0;i<newsData.length;i++){
-							if(newsData[i].newsId == $checked.eq(j).parents("tr").find(".news_del").attr("data-id")){
-								newsData.splice(i,1);
-								newsList(newsData);
-							}
-						}
-	            	}
-	            	$('.layui-table thead input[type="checkbox"]').prop("checked",false);
-	            	form.render();
+            	//删除数据
+            	var ids = '';
+            	for(var j=0;j<$checked.length;j++){
+    				ids += $checked.eq(j).parents("tr").find(".del").attr("data-id") + ',';
+            	}
+				$.get(BASE_URL + '/user/delete',{ids:ids.substring(0,ids.length - 1)},function(data){
+					if(data.success){
+						layer.msg(data.errorMsg);
+		            	for(var j=0;j<$checked.length;j++){
+		    				$checked.eq(j).parents("tr").remove(); 
+		            	}						
+		            	$('.layui-table thead input[type="checkbox"]').prop("checked",false);
+		            	form.render();
+					}else{
+						layer.msg(data.errorMsg);
+					}
 	                layer.close(index);
-					layer.msg("删除成功");
-	            },2000);
+				});
 	        })
 		}else{
 			layer.msg("请选择需要删除的记录");
@@ -103,30 +107,23 @@ layui.config({
 		form.render('checkbox');
 	})
 
-	//是否展示
-	form.on('switch(isShow)', function(data){
-		var index = layer.msg('修改中，请稍候',{icon: 16,time:false,shade:0.8});
-        setTimeout(function(){
-            layer.close(index);
-			layer.msg("展示状态修改成功！");
-        },2000);
-	})
- 
 	//操作
-	$("body").on("click",".news_edit",function(){  //编辑
-		layer.alert('您点击了文章编辑按钮，由于是纯静态页面，所以暂时不存在编辑内容，后期会添加，敬请谅解。。。',{icon:6, title:'文章编辑'});
+	$("body").on("click",".edit",function(){  //编辑
+		layer.alert('您点击了编辑按钮，暂时不存在编辑内容，后期会添加，敬请谅解。。。',{icon:6, title:'编辑'});
 	})
 
-	$("body").on("click",".news_del",function(){  //删除
+	$("body").on("click",".del",function(){  //删除
 		var _this = $(this);
 		layer.confirm('确定删除此信息？',{icon:3, title:'提示信息'},function(index){
-			//_this.parents("tr").remove();
-			for(var i=0;i<newsData.length;i++){
-				if(newsData[i].newsId == _this.attr("data-id")){
-					newsData.splice(i,1);
-					newsList(newsData);
-				}
-			}
+			//_this.parents("tr").remove(); 
+			$.get(BASE_URL + '/user/delete',{ids:_this.attr("data-id")},function(data){
+					if(data.success){
+						layer.msg(data.errorMsg);
+						_this.parents("tr").remove(); 
+					}else{
+						layer.msg(data.errorMsg);
+					}
+			});
 			layer.close(index);
 		});
 	})
