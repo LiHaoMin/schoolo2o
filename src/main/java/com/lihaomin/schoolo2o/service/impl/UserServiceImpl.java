@@ -55,6 +55,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public boolean save(User user) {
         user.setCreateTime(new Date());
+        user.setName(user.getUsername());
         int rows = userMapper.insertSelective(user);
         if(rows > 0)
             return true;
