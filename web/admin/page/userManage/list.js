@@ -42,7 +42,7 @@ layui.config({
 			var index = layui.layer.open({
 				title : "添加",
 				type : 2,
-				content : "newsAdd.html",
+				content : "add.html",
 				success : function(layero, index){
 					setTimeout(function(){
 						layui.layer.tips('点击此处返回列表', '.layui-layer-setwin .layui-layer-close', {

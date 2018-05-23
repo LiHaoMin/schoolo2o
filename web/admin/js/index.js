@@ -11,6 +11,8 @@ layui.config({
 			url : "json/navs.json" //获取菜单json地址
 		});
 
+		if(window.sessionStorage.getItem('user') == null)
+            window.location.href = "page/login/login.html";
 	//更换皮肤
 	function skins(){
 		var skin = window.sessionStorage.getItem("skin");
@@ -129,6 +131,7 @@ layui.config({
 		window.sessionStorage.removeItem("menu");
 		menu = [];
 		window.sessionStorage.removeItem("curmenu");
+        window.sessionStorage.removeItem("user");
 	})
 
 	//隐藏左侧导航

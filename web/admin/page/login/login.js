@@ -23,6 +23,7 @@ layui.config({
 			layer.close(index);
 			if(data.success){
 				window.location.href = "../../index.html";
+                window.sessionStorage.setItem("user",data.data);
 			}else{
 				layer.msg(data.errorMsg);
 			}

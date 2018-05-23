@@ -89,7 +89,7 @@ layui.config({
 		var index = layui.layer.open({
 			title : "添加会员",
 			type : 2,
-			content : "addUser.html",
+			content : "add.html",
 			success : function(layero, index){
 				setTimeout(function(){
 					layui.layer.tips('点击此处返回会员列表', '.layui-layer-setwin .layui-layer-close', {

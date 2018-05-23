@@ -9,4 +9,5 @@ public interface UserService {
     Page<User> queryList(int currentPage);
     boolean login(String username,String password);
     boolean delete(List<Integer> ids);
+    boolean save(User user);
 }

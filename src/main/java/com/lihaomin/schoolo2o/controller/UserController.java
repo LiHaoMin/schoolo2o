@@ -5,10 +5,7 @@ import com.lihaomin.schoolo2o.common.RequestResult;
 import com.lihaomin.schoolo2o.model.User;
 import com.lihaomin.schoolo2o.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,11 +34,20 @@ public class UserController {
     }
 
     @RequestMapping("/delete")
-    public RequestResult login(@RequestParam("ids") List<Integer> ids){
+    public RequestResult delete(@RequestParam("ids") List<Integer> ids){
         boolean flag = userService.delete(ids);
         if(flag){
             return new RequestResult(true,"删除成功");
         }
         return new RequestResult(false,"删除失败");
+    }
+
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    public RequestResult save(@RequestBody User user){
+        boolean flag = userService.save(user);
+        if(flag){
+            return new RequestResult(true,"添加成功");
+        }
+        return new RequestResult(false,"添加失败");
     }
 }

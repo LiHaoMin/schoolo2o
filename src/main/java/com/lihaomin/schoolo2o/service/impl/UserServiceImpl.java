@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -46,6 +47,15 @@ public class UserServiceImpl implements UserService{
         UserExample example = new UserExample();
         example.or().andIdIn(ids);
         int rows = userMapper.deleteByExample(example);
+        if(rows > 0)
+            return true;
+        return false;
+    }
+
+    @Override
+    public boolean save(User user) {
+        user.setCreateTime(new Date());
+        int rows = userMapper.insertSelective(user);
         if(rows > 0)
             return true;
         return false;
