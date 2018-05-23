@@ -21,51 +21,51 @@
 		    <a class="layui-btn search_btn">查询</a>
 		</div>
 		<div class="layui-inline">
-			<a class="layui-btn layui-btn-normal add_btn">添加文章</a>
+			<a class="layui-btn layui-btn-normal add_btn">添加</a>
 		</div>
 		<div class="layui-inline">
 			<a class="layui-btn layui-btn-danger batchDel">批量删除</a>
 		</div>
 	</blockquote>
 	<div class="layui-form">
-	  	<table class="layui-table">
+	  	<table class="layui-table" id="app">
 		    <colgroup>
 				<col width="50">
-				<col>
-				<col width="9%">
-				<col width="9%">
-				<col width="9%">
-				<col width="9%">
-				<col width="9%">
+				<col width="">
+				<col width="">
+				<col width="">
+				<col width="">
 				<col width="15%">
 		    </colgroup>
 		    <thead>
 				<tr>
 					<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
-					<th style="text-align:left;">头名称</th>
-					<th>头条链接</th>
-					<th>头条图片</th>
-					<th>排序</th>
+					<th style="text-align:left;">名称</th>
+					<th>权重</th>
 					<th>状态</th>
-					<th>发布时间</th>
+					<th>时间</th>
 					<th>操作</th>
 				</tr>
 		    </thead>
 		    <tbody>
-				<tr>
-				<td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon"></i></div></td>
-				<td align="left">1111111111111</td>
-				<td>2222222222222</td>
-				<td>3333333333333333</td>
-				<td>4</td>
-				<td><input type="checkbox" name="show" lay-skin="switch" lay-text="是|否" lay-filter="isShow" checked=""><div class="layui-unselect layui-form-switch" lay-skin="_switch"><em>否</em><i></i></div></td>
-				<td>2017-04-14</td>
-				<td><a class="layui-btn layui-btn-mini news_edit"><i class="iconfont icon-edit"></i> 编辑</a><a class="layui-btn layui-btn-danger layui-btn-mini news_del" data-id="2"><i class="layui-icon"></i> 删除</a></td></tr>
+				<tr v-for="item in dataList">
+					<td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>
+					<td align="left">{{ item.name }}</td>
+					<td>{{ item.priority }}</td>
+					<td>{{ item.status == 1 ? '启用' : '禁用'}}</td>
+					<td>{{ item.createTime }}</td>
+					<td>
+						<a class="layui-btn layui-btn-mini edit"><i class="iconfont icon-edit"></i> 编辑</a>
+						<a class="layui-btn layui-btn-danger layui-btn-mini del" :data-id="item.id"><i class="layui-icon"></i> 删除</a>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
 	<div id="page"></div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script type="text/javascript" src="../../layui/layui.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
 	<script type="text/javascript" src="list.js"></script>
 </body>
 </html>

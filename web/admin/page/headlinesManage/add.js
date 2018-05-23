@@ -7,22 +7,13 @@ layui.config({
 		laypage = layui.laypage;
 		$ = layui.jquery;
 
-    $.get(BASE_URL + '/shopCategory/parentList',function(data){
-        if(data.success){
-            for(var i = 0;i < data.data.length; i++){
-                $('#parentId').append('<option value="'+data.data[i].id+'">'+data.data[i].categoryName+'</option>');
-            }
-            form.render('select');
-        }else{
-            layer.msg(data.errorMsg);
-        }
-    });
+ 	var addUserArray = [],addUser;
  	form.on("submit(add)",function(data){
  		//弹出loading
  		var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
         $.ajax({
             type : "POST",
-            url : BASE_URL + '/shopCategory/save',
+            url : BASE_URL + '/headLines/save',
             data : JSON.stringify(data.field),
             contentType : "application/json",
             dataType : "json",
@@ -68,7 +59,7 @@ layui.config({
             },
         })
     });
-
+	
 })
 
 //格式化时间
