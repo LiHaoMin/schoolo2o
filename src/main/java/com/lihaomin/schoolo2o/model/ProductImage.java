@@ -1,5 +1,7 @@
 package com.lihaomin.schoolo2o.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -29,6 +31,7 @@ public class ProductImage implements Serializable {
      */
     private Integer productId;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
 
     private Date updateTime;

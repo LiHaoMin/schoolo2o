@@ -1,5 +1,7 @@
 package com.lihaomin.schoolo2o.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -40,6 +42,7 @@ public class HeadLines implements Serializable {
     /**
      * 创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
 
     /**

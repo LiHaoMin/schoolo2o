@@ -11,7 +11,7 @@
 },{
 	"title" : "类别管理",
 	"icon" : "&#xe656;",
-	"href" : "page/shopCategoryManage/linksList.html",
+	"href" : "page/shopCategoryManage/list.html",
 	"spread" : false
 },{
 	"title" : "区域管理",

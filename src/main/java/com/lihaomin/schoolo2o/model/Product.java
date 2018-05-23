@@ -1,5 +1,7 @@
 package com.lihaomin.schoolo2o.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -53,7 +55,7 @@ public class Product implements Serializable {
      * 商品所属店铺
      */
     private Integer shopId;
-
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createtime;
 
     private Date updatetime;
