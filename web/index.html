@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .wrap {
+            margin-top: 10px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .wrap .item {
+            position: relative;
+            float: left;
+            width: 50%;
+            height: 15vh;
+            line-height: 80px;
+            text-align: center;
+            background-color: #1AA094;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <mt-tab-container v-model="selected">
+        <mt-tab-container-item id="tab1">
+            <mt-swipe @change="handleChange" style="width: 100%; height: 30vh">
+                <mt-swipe-item style="background-color: #1E9FFF;">1</mt-swipe-item>
+                <mt-swipe-item style="background-color: #ff0000;">2</mt-swipe-item>
+                <mt-swipe-item style="background-color: #3dff6e;">3</mt-swipe-item>
+            </mt-swipe>
+            <div class="wrap">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+                <div class="item">7</div>
+                <div class="item">8</div>
+            </div>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="tab2">
+            <mt-cell v-for="n in 5" title="tab-container 2"></mt-cell>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="tab3">
+            <mt-cell v-for="n in 7" title="tab-container 3"></mt-cell>
+        </mt-tab-container-item>
+    </mt-tab-container>
+    <mt-tabbar v-model="selected">
+        <mt-tab-item id="tab1">
+            <img slot="icon" src="https://www.easyicon.net/api/resizeApi.php?id=1195215&size=48">首页
+        </mt-tab-item>
+        <mt-tab-item id="tab2">
+            <img slot="icon" src="https://www.easyicon.net/api/resizeApi.php?id=1199957&size=48">订单
+        </mt-tab-item>
+        <mt-tab-item id="tab3">
+            <img slot="icon" src="https://www.easyicon.net/api/resizeApi.php?id=1174233&size=48">我的
+        </mt-tab-item>
+    </mt-tabbar>
+</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            selected: 'tab1'
+        },
+        methods: {
+            handleChange(index) {
+                console.log(index);
+            }
+        }
+    })
+</script>
+</html>
