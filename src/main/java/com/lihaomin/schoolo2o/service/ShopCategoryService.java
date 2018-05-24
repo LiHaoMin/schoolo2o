@@ -10,5 +10,5 @@ public interface ShopCategoryService {
     Page<ShopCategory> list(int page);
     boolean delete(List<Integer> ids);
     boolean save(ShopCategory shopCategory);
-    List<ShopCategory> parentList();
+    List<ShopCategory> parentList(int lv);
 }

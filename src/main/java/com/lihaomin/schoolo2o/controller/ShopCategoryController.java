@@ -46,8 +46,8 @@ public class ShopCategoryController {
     }
 
     @RequestMapping("/parentList")
-    public RequestResult<List<ShopCategory>> parentList(){
-        List<ShopCategory> shopCategories = shopCategoryService.parentList();
+    public RequestResult<List<ShopCategory>> parentList(@RequestParam(value = "lv",defaultValue = "1") int lv){
+        List<ShopCategory> shopCategories = shopCategoryService.parentList(lv);
         RequestResult<List<ShopCategory>> result = new RequestResult(shopCategories);
         result.setTotal(shopCategories.size());
         return result;

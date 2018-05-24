@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>列表--校园o2o后台管理</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../../layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="../../css/news.css" media="all" />
+</head>
+<body class="childrenBody">
+	<blockquote class="layui-elem-quote news_search">
+		<div class="layui-inline">
+		    <div class="layui-input-inline">
+		    	<input type="text" value="" placeholder="请输入关键字" class="layui-input search_input">
+		    </div>
+		    <a class="layui-btn search_btn">查询</a>
+		</div>
+		<div class="layui-inline">
+			<a class="layui-btn layui-btn-normal add_btn">添加</a>
+		</div>
+		<div class="layui-inline">
+			<a class="layui-btn layui-btn-danger batchDel">批量删除</a>
+		</div>
+	</blockquote>
+	<div class="layui-form">
+	  	<table class="layui-table" id="app">
+		    <colgroup>
+				<col width="50">
+				<col width="">
+				<col width="">
+				<col width="">
+				<col width="">
+				<col width="">
+				<col width="">
+				<col width="">
+				<col width="">
+				<col width="15%">
+		    </colgroup>
+		    <thead>
+				<tr>
+					<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
+					<th style="text-align:left;">名称</th>
+					<th>描述</th>
+					<th>地址</th>
+					<th>联系方式</th>
+					<th>权重</th>
+					<th>状态</th>
+					<th>建议</th>
+					<th>时间</th>
+					<th>操作</th>
+				</tr>
+		    </thead>
+		    <tbody>
+				<tr v-for="item in dataList">
+					<td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>
+					<td align="left">{{ item.shopName }}</td>
+					<td>{{ item.shopDescription }}</td>
+					<td>{{ item.shopAddress }}</td>
+					<td>{{ item.phone }}</td>
+					<td>{{ item.priority }}</td>
+					<td>{{ item.status == 1 ? '启用' : '禁用'}}</td>
+					<td>{{ item.advice }}</td>
+					<td>{{ item.createTime }}</td>
+					<td>
+						<a class="layui-btn layui-btn-mini edit"><i class="iconfont icon-edit"></i> 编辑</a>
+						<a class="layui-btn layui-btn-danger layui-btn-mini del" :data-id="item.id"><i class="layui-icon"></i> 删除</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="page"></div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script type="text/javascript" src="../../layui/layui.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="list.js"></script>
+</body>
+</html>

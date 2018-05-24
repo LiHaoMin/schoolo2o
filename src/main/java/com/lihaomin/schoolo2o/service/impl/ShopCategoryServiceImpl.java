@@ -45,9 +45,12 @@ public class ShopCategoryServiceImpl implements ShopCategoryService{
     }
 
     @Override
-    public List<ShopCategory> parentList() {
+    public List<ShopCategory> parentList(int lv) {
         ShopCategoryExample example = new ShopCategoryExample();
-        example.createCriteria().andParentIdIsNull();
+        if(lv == 1)
+            example.createCriteria().andParentIdIsNull();
+        else
+            example.createCriteria().andParentIdIsNotNull();
         List<ShopCategory> shopCategories = shopCategoryMapper.selectByExample(example);
         return shopCategories;
     }

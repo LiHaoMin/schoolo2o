@@ -26,6 +26,6 @@
 },{
 	"title" : "商铺管理",
 	"icon" : "&#xe653;",
-	"href" : "page/shopManage/images.html",
+	"href" : "page/shopManage/list.html",
 	"spread" : false
 }]
