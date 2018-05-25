@@ -43,4 +43,13 @@ public class ShopController {
         }
         return new RequestResult(false,"添加失败");
     }
+
+    @RequestMapping("/get")
+    public RequestResult get(int id){
+        Shop shop = shopService.get(id);
+        if(shop!=null){
+            return new RequestResult(shop);
+        }
+        return new RequestResult(false,"添加失败");
+    }
 }

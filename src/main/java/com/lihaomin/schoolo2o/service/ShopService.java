@@ -10,4 +10,5 @@ public interface ShopService {
     Page<Shop> list(int page);
     boolean delete(List<Integer> ids);
     boolean save(Shop shop);
+    Shop get(int id);
 }

@@ -24,7 +24,9 @@ public class ShopServiceImpl implements ShopService{
     @Override
     public Page<Shop> list(int page) {
         Page<Shop> shops = PageHelper.startPage(page, Contracts.PAGE_SIZE);
-        shopMapper.selectByExample(null);
+        ShopExample example = new ShopExample();
+        example.setOrderByClause("priority desc");
+        shopMapper.selectByExample(example);
         return shops;
     }
 
@@ -45,5 +47,11 @@ public class ShopServiceImpl implements ShopService{
         if(rows > 0)
             return true;
         return false;
+    }
+
+    @Override
+    public Shop get(int id) {
+        Shop shop = shopMapper.selectByPrimaryKey(id);
+        return shop;
     }
 }
