@@ -35,14 +35,19 @@
 				<col width="">
 				<col width="">
 				<col width="">
+				<col width="">
+				<col width="">
 				<col width="15%">
 		    </colgroup>
 		    <thead>
 				<tr>
 					<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
 					<th style="text-align:left;">名称</th>
+					<th>描述</th>
+					<th>价格</th>
 					<th>权重</th>
 					<th>状态</th>
+					<th>店铺名称</th>
 					<th>时间</th>
 					<th>操作</th>
 				</tr>
@@ -50,10 +55,13 @@
 		    <tbody>
 				<tr v-for="item in dataList">
 					<td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>
-					<td align="left">{{ item.name }}</td>
+					<td align="left">{{ item.productName }}</td>
+					<td>{{ item.productdescription }}</td>
+					<td>{{ item.normalprice }}</td>
 					<td>{{ item.priority }}</td>
-					<td>{{ item.status == 1 ? '启用' : '禁用'}}</td>
-					<td>{{ item.createTime }}</td>
+					<td>{{ item.status == 1 ? '上架' : '下架'}}</td>
+					<td>{{ item.shop.shopName }}</td>
+					<td>{{ item.createtime }}</td>
 					<td>
 						<a class="layui-btn layui-btn-mini edit"><i class="iconfont icon-edit"></i> 编辑</a>
 						<a class="layui-btn layui-btn-danger layui-btn-mini del" :data-id="item.id"><i class="layui-icon"></i> 删除</a>

@@ -3,23 +3,17 @@
     <div class="scroll">
       <div v-bind:style="{height:screenHeight - scrollHeight + 'px'}" class="wrapper right" ref="wrapper_right">
         <ul class="content">
-          <div class="foods_item" v-for="(item,index) in list_right" :key="index">
-            <div class="item_detail" v-for="(it,index) in item.list" :key="index">
-              <button @click.stop="$parent.$parent.showDetail(it)" v-bind:style="{'background-image':'url('+it.img+')'}" class="h_img">
+          <div class="foods_item">
+            <div class="item_detail" v-for="(it,index) in products" :key="index">
+              <button @click.stop="$parent.$parent.showDetail(it)" v-bind:style="{'background-image':'url('+it.thumbnail+')'}" class="h_img">
                 <!-- <img :src="it.img" :alt="it.name" /> -->
               </button>
               <div class="content">
-                <span class="d_title">{{it.name}}</span><br/>
-                <span>{{it.title}}</span>
+                <span class="d_title">{{it.productName}}</span><br/>
+                <span>{{it.productdescription}}</span>
                 <div class="down">
-                  <span class="price" v-html="it.price"></span>
+                  <span class="price">¥ {{it.normalprice}}</span>
                   <div class="add_content">
-                    <div v-bind:style="{width:it.count>0?'62px':'0px'}" style="transition: all .25s linear;">
-                      <div style="height:25px;overflow:hidden;">
-                        <mt-button @click.stop="$parent.$parent.addToCar($event,it)" type="primary" class="add_button" plain>-</mt-button>
-                        <span class="fn-14" v-html="it.count"></span>
-                      </div>
-                    </div>
                     <mt-button @click.stop="$parent.$parent.addToCar($event,it,'add')" class="add_button" type="primary">+</mt-button>
                   </div>
                 </div>
@@ -66,6 +60,9 @@ export default {
       foot_index: 0,
       needChange: true
     };
+  },
+  props:{
+    products:Object
   },
   methods: {
     /**

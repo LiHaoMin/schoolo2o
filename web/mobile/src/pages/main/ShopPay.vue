@@ -9,43 +9,42 @@
 				<h2 v-bind:style="{opacity:(27-top)/27}">订单配送至</h2>
 				<div v-bind:style="{top:22 + mobile - (top<32?top:32) + 'px'}" class="float_title">
 					<h2>
-						上海市普陀区200号101事大妹妹女士收
+						杭州市下沙成蹊苑
 					</h2>
 					<img v-bind:style="{opacity:(27-top)/27}" src="../../../static/img/icon/right-w.png" />
 				</div>
-				<h2 v-bind:style="{opacity:(27-top)/27}" class="info">刘德华 13771162366</h2>
+				<h2 v-bind:style="{opacity:(27-top)/27}" class="info">刘德华 135xxxxxxxx</h2>
 			</div>
 		</div>
 
 		<!-- 支付内容 -->
 		<div class="msg_content" slot="content">
-			<div class="time">
-				<div class="left">
-					<h2>尽快送达【预计15：33】</h2>
-					<div>
-						<span style="color:white" class="primary_bg">蜂鸟专送</span>
-						<span class="primary_border">准时达</span>
-						<span>超时十分钟享赔付</span>
-					</div>
-				</div>
-				<img src="../../../static/img/icon/right.png" alt="">
-			</div>
+			<!--<div class="time">-->
+				<!--<div class="left">-->
+					<!--<h2>尽快送达【预计15：33】</h2>-->
+					<!--<div>-->
+						<!--<span style="color:white" class="primary_bg">蜂鸟专送</span>-->
+						<!--<span class="primary_border">准时达</span>-->
+						<!--<span>超时十分钟享赔付</span>-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--<img src="../../../static/img/icon/right.png" alt="">-->
+			<!--</div>-->
 
 			<!-- 商品展示 -->
 			<div class="order">
 				<h2 class="title">
-					<font>CoCo都可（灵岩南路店）</font>
+					<font>{{ list[0].shop.shopName }}</font>
 				</h2>
 				<div v-for="(item,index) in list" :key="index" class="order_item">
 					<div class="left">
 						<h2>
-							<font>{{item.name}}</font>
-							<font>X{{item.num}}</font>
+							<font>{{item.productName}}</font>
+							<font>X{{item.count}}</font>
 						</h2>
-						<span>{{item.label}}</span>
 					</div>
 					<div class="right">
-						<h2>￥{{item.price}}</h2>
+						<h2>￥{{item.normalprice}}</h2>
 					</div>
 				</div>
 				<div class="peisong order_item">
@@ -55,7 +54,7 @@
 						</h2>
 					</div>
 					<div class="right">
-						<h2>￥22</h2>
+						<h2>￥20</h2>
 					</div>
 				</div>
 			</div>
@@ -64,7 +63,7 @@
 		<!-- 底部导航 -->
 		<div slot="footer">
 			<div class="pay_footer">
-				<div class="left primary_bg_gray">￥28</div>
+				<div class="left primary_bg_gray">￥{{ this.$route.query.totalPrice }}</div>
 				<div class="right">去支付</div>
 			</div>
 		</div>
@@ -80,38 +79,7 @@ export default {
       title: "",
       top: 0,
       mobile: 20,
-      list: [
-        {
-          name: "奶茶三兄弟/大杯",
-          num: 1,
-          label: "奶茶三兄弟/大杯/加冰",
-          price: "12"
-        },
-        {
-          name: "奶茶三兄弟/大杯",
-          num: 1,
-          label: "奶茶三兄弟/大杯/加冰",
-          price: "12"
-        },
-        {
-          name: "奶茶三兄弟/大杯",
-          num: 1,
-          label: "奶茶三兄弟/大杯/加冰",
-          price: "12"
-        },
-        {
-          name: "奶茶三兄弟/大杯",
-          num: 1,
-          label: "奶茶三兄弟/大杯/加冰",
-          price: "12"
-        },
-        {
-          name: "奶茶三兄弟/大杯",
-          num: 1,
-          label: "奶茶三兄弟/大杯/加冰",
-          price: "12"
-        }
-      ]
+      list: this.$route.query.item
     };
   },
   methods: {

@@ -20,7 +20,7 @@
 
           <!-- 中间内容区域 -->
           <div v-bind:style="{height:screenHeight - scrollHeight + 'px'}" class="shopDetail_content">
-            <shop-detail-item ref="shopDetailItem" />
+            <shop-detail-item ref="shopDetailItem" :products="products" />
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@
 
 <script>
 import BScroll from "better-scroll";
-import { getShop } from '@/api/ApiRequest'
+import { getShop,getproduct } from '@/api/ApiRequest'
 export default {
   name: "ShopDetail",
   components: {
@@ -78,7 +78,7 @@ export default {
       zIndex: 2003,
       selected: "1",
       top: 0,
-      left: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      products:Object,
       shop:Object
     };
   },
@@ -144,6 +144,11 @@ export default {
   created(){
       getShop(this.$route.query.shopId).then(rsp => {
           this.shop = rsp.data
+      })
+      getproduct(this.$route.query.shopId).then(rsp => {
+          for(var i =0;i<rsp.data.length;i++)
+            rsp.data[i].count = 0;
+          this.products = rsp.data
       })
   }
 };

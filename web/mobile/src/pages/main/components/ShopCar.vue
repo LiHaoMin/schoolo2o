@@ -2,7 +2,7 @@
   <div class="shop_car">
     <div @click="$parent.$parent.detailPop = !$parent.$parent.detailPop" v-show="$parent.$parent.detailPop" class="shade_modal_bottom"></div>
     <div @click="clickTime!=0&&(show=!show)" v-if="show" class="shade_modal"></div>
-    <div class="ads fn-9">满25减12，满45减18，满80减28</div>
+    <!--<div class="ads fn-9">满25减12，满45减18，满80减28</div>-->
     <div v-bind:style="{height:show?(55*goods_list.length + 57) +'px':'0px'}" class="goods transition_3">
       <div class="goods_header">
         <span class="choose">已选商品</span>
@@ -13,10 +13,10 @@
       <div class="goods_list">
         <div class="goods_item" v-for="(item,index) in goods_list" :key="index">
           <div class="left">
-            <h2>{{item.name}}</h2>
+            <h2>{{item.productName}}</h2>
             <span>通用</span>
           </div>
-          <div class="money" v-html="item.price">
+          <div class="money" v-html="item.normalprice">
           </div>
           <div class="right">
             <div class="add_content">
@@ -26,7 +26,7 @@
                   <span class="fn-14">{{item.count}}</span>
                 </div>
               </div>
-              <mt-button @click="drop" class="add_button" type="primary">+</mt-button>
+              <mt-button @click="drop($event,item)" class="add_button" type="primary">+</mt-button>
             </div>
           </div>
         </div>
@@ -44,15 +44,15 @@
       <div class="content">
         <div v-if="clickTime>0">
           <h2 class="fn-20">
-            <font class="fn-12">￥</font>{{clickTime}}</h2>
+            <font class="fn-12">￥</font>{{parseFloat(clickTime).toFixed(2)}}</h2>
           <span class="fn-10">配送费
             <font class="fn-8">￥</font>5
           </span>
         </div>
         <h2 v-else class="fn-15" style="color:#999999">未选购商品</h2>
       </div>
-      <div v-if="clickTime>0" @click="go('shopPay')" class="jiesuan ">去结算</div>
-      <div v-else @click="go('shopPay')" class="jiesuan no">20元起送</div>
+      <div v-if="clickTime>20" @click="go({name:'shopPay',query:{item:goods_list,totalPrice:parseFloat(clickTime).toFixed(2)}})" class="jiesuan ">去结算</div>
+      <div v-else @click="go({name:'shopPay',query:{item:goods_list,totalPrice:parseFloat(clickTime).toFixed(2)}})" class="jiesuan no">20元起送</div>
       <div>
         <div class="ball-container">
           <transition name="fade" v-for="(ball,index) in balls" :key="index" @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
@@ -116,14 +116,15 @@ export default {
       if (item.count <= 0) {
         this.goods_list.splice(index, 1);
       }
-      this.clickTime--;
+      this.clickTime-=parseFloat(item.normalprice);
       if (this.clickTime == 0) {
         this.show = false;
       }
+      console.log(this.goods_list.length)
     },
     drop(el, item) {
       item.count++;
-      this.clickTime++;
+      this.clickTime+=parseFloat(item.normalprice);
       let flag = false;
       for (let i = 0; i < this.goods_list.length; i++) {
         if (this.goods_list[i].id == item.id) {
@@ -145,6 +146,7 @@ export default {
           return;
         }
       }
+      console.log(this.goods_list.length)
     },
 
     beforeEnter(el) {

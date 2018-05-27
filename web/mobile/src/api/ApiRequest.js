@@ -27,3 +27,10 @@ export function getShop(id) {
     method: 'get'
   })
 }
+
+export function getproduct(id) {
+  return request({
+    url: '/product/list?shopId='+id,
+    method: 'get'
+  })
+}

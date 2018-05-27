@@ -2,9 +2,7 @@ package com.lihaomin.schoolo2o.controller;
 
 import com.github.pagehelper.Page;
 import com.lihaomin.schoolo2o.common.RequestResult;
-import com.lihaomin.schoolo2o.model.Area;
 import com.lihaomin.schoolo2o.model.Shop;
-import com.lihaomin.schoolo2o.service.AreaService;
 import com.lihaomin.schoolo2o.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +22,12 @@ public class ShopController {
         RequestResult<List<Shop>> result = new RequestResult(shops.getResult());
         result.setTotal(shops.getPages());
         return result;
+    }
+
+    @RequestMapping("/list2")
+    public RequestResult<List<Shop>> list2(){
+        List<Shop> shops = shopService.list2();
+        return new RequestResult<>(shops);
     }
 
     @RequestMapping("/delete")

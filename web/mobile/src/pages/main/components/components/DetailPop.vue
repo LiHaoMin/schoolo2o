@@ -1,19 +1,17 @@
 <template>
   <div class="detailPop">
     <mt-popup v-model="$parent.$parent.detailPop" position="bottom"  class="mint-popup" :modal="true">
-      <img v-lazy="img" class="detail-image" />
+      <mt-swipe :auto="2000" style="height: 80%">
+        <mt-swipe-item v-for="(item,index) in $parent.$parent.detail.productImages" :key="index">
+          <img :src="item.imageUrl" class="detail-image" />
+        </mt-swipe-item>
+      </mt-swipe>
       <div class="content">
-        <h2>湘西外婆菜丰盛套餐</h2>
-        <span>月售512份 好评率100%</span>
+        <h2>{{$parent.$parent.detail.productName}}</h2>
+        <span>{{$parent.$parent.detail.productdescription}}</span>
         <div class="opt">
-          <span class="price" v-html="$parent.$parent.detail.price"></span>
+          <span class="price" >¥ {{$parent.$parent.detail.normalprice}}</span>
           <div class="add_content">
-            <div v-bind:style="{width:$parent.$parent.detail.count>0?'62px':'0px'}" style="transition: all .25s linear;">
-              <div style="height:25px;overflow:hidden;">
-                <mt-button @click.stop="$parent.$parent.addToCar($event,$parent.$parent.detail)" type="primary" class="add_button" plain>-</mt-button>
-                <span class="fn-14" v-html="$parent.$parent.detail.count"></span>
-              </div>
-            </div>
             <mt-button @click.stop="$parent.$parent.addToCar($event,$parent.$parent.detail,'add')" class="add_button" type="primary">+</mt-button>
           </div>
         </div>
@@ -26,8 +24,7 @@ export default {
   name: "detailPop",
   data() {
     return {
-      data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      img: require('../../../../assets/img/shop/detail.jpeg')
+
     };
   },
   components: {

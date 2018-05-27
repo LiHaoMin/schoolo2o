@@ -127,7 +127,7 @@
       #{shopId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lihaomin.schoolo2o.model.Product">
+  <insert id="insertSelective" parameterType="com.lihaomin.schoolo2o.model.Product" useGeneratedKeys="true" keyProperty="id">
     insert into tb_product
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -328,4 +328,26 @@
       updateTime = #{updatetime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <resultMap id="ProductDtoMap" type="com.lihaomin.schoolo2o.model.dto.ProductDto">
+    <id property="id" column="id" />
+    <association property="shop"  select="selectshop" column="shop_id" javaType="com.lihaomin.schoolo2o.model.Shop">
+    </association>
+    <collection property="productImages" select="selectProductImage"  column="id" ofType="com.lihaomin.schoolo2o.model.ProductImage"></collection>
+  </resultMap>
+  <select id="queryList" resultMap="ProductDtoMap">
+    SELECT p.*
+    FROM tb_product p
+    <if test="shopId != null">
+      WHERE
+      p.`status` = 1
+      and p.shop_id = #{shopId}
+    </if>
+    ORDER BY p.priority
+  </select>
+  <select id="selectshop" resultType="com.lihaomin.schoolo2o.model.Shop">
+    SELECT * FROM tb_shop WHERE  id = #{id} limit 1
+  </select>
+  <select id="selectProductImage" resultType="com.lihaomin.schoolo2o.model.ProductImage">
+    SELECT * FROM tb_product_image WHERE  product_id = #{id}
+  </select>
 </mapper>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>添加</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../../layui/css/layui.css" media="all" />
+	<style type="text/css">
+		.layui-form-item .layui-inline{ width:33.333%; float:left; margin-right:0; }
+		@media(max-width:1240px){
+			.layui-form-item .layui-inline{ width:100%; float:none; }
+		}
+	</style>
+</head>
+<body class="childrenBody">
+	<form class="layui-form" style="width:80%;">
+		<div class="layui-form-item">
+			<label class="layui-form-label">名称</label>
+			<div class="layui-input-block">
+				<input type="text" name="productName" class="layui-input userName" lay-verify="required" placeholder="请输入名称">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">描述</label>
+			<div class="layui-input-block">
+				<textarea  name="productdescription" placeholder="请输入内容描述" class="layui-textarea"></textarea>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">价格</label>
+			<div class="layui-input-block">
+				<input type="text" name="normalprice" class="layui-input userEmail" placeholder="请输入价格">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">缩略图</label>
+			<div class="layui-input-block">
+				<input type="file" id="imgFile">
+				<input type="hidden" id="categoryImage" name="thumbnail">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">图片</label>
+			<div class="layui-input-block">
+				<input type="file" id="imgs" multiple>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">权重</label>
+			<div class="layui-input-block">
+				<input type="text" name="priority" class="layui-input userEmail" placeholder="请输入权重">
+			</div>
+		</div>
+		<div class="layui-form-item">
+		    <div class="layui-inline">
+			    <label class="layui-form-label">店铺</label>
+				<div class="layui-input-block">
+					<select name="shopId" id="shop" class="userGrade" lay-filter="userGrade">
+						<option value="">请选择</option>
+				    </select>
+				</div>
+		    </div>
+		    <div class="layui-inline">
+			    <label class="layui-form-label">状态</label>
+				<div class="layui-input-block">
+					<select name="status" class="userStatus" lay-filter="userStatus">
+						<option value="0">下架</option>
+						<option value="1">上架</option>
+				    </select>
+				</div>
+		    </div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit="" lay-filter="add">立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+		    </div>
+		</div>
+	</form>
+	<script type="text/javascript" src="../../layui/layui.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="add.js"></script>
+</body>
+</html>

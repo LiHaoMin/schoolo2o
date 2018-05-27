@@ -2,16 +2,13 @@ package com.lihaomin.schoolo2o.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.lihaomin.schoolo2o.common.BussinessException;
 import com.lihaomin.schoolo2o.common.Contracts;
-import com.lihaomin.schoolo2o.common.ResultCode;
 import com.lihaomin.schoolo2o.mapper.ShopMapper;
 import com.lihaomin.schoolo2o.model.Shop;
 import com.lihaomin.schoolo2o.model.ShopExample;
 import com.lihaomin.schoolo2o.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -27,6 +24,15 @@ public class ShopServiceImpl implements ShopService{
         ShopExample example = new ShopExample();
         example.setOrderByClause("priority desc");
         shopMapper.selectByExample(example);
+        return shops;
+    }
+
+    @Override
+    public List<Shop> list2() {
+        ShopExample example = new ShopExample();
+        example.createCriteria().andStatusEqualTo(1);
+        example.setOrderByClause("priority desc");
+        List<Shop> shops = shopMapper.selectByExample(example);
         return shops;
     }
 

@@ -28,4 +28,9 @@
 	"icon" : "&#xe653;",
 	"href" : "page/shopManage/list.html",
 	"spread" : false
+},{
+	"title" : "商品管理",
+	"icon" : "&#xe735;",
+	"href" : "page/productManage/list.html",
+	"spread" : false
 }]
