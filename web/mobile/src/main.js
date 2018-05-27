@@ -11,6 +11,7 @@ import Vue from 'vue'
 import App from './components/common/App'
 import store from './vuex/store'
 import router from './routers'
+import global_ from './components/common/Global'
 
 //引入手机ui框架 mint-ui
 import MintUI from 'mint-ui'
@@ -41,6 +42,7 @@ if ('addEventListener' in document) {
 
 /*********************************给vue增加扩展方法start ****************** */
 Vue.prototype.utils = utils;
+Vue.prototype.GLOBAL = global_;
 /*********************************给vue增加扩展方法end ****************** */
 
 Vue.use(VueAwesomeSwiper)

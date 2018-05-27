@@ -2,33 +2,34 @@
   <section class="orderItem">
     <div class="row" style="min-height:60px">
       <div class="shop_header">
-        <img :src="value.img" alt="">
+        <img :src="value[0].shop.shopImage" alt="">
         <div class="shop_text">
           <h2 class="fn-15 fw-2">
-            <span> {{value.title}}</span>
+            <span> {{value[0].shop.shopName}}</span>
             <img src="../../../../static/img/icon/right.png" alt="">
           </h2>
-          <span class="fn-c-memo-light">2017.11.23</span>
+          <span class="fn-c-memo-light">{{value[0].createtime}}</span>
         </div>
       </div>
       <div class="order_state fn-13 fn-c-memo fw-2">
         订单已完成
       </div>
     </div>
-    <div class="row">
+    <div class="row" v-for="item in value">
       <div class="shop_header">
         <div class="shop_text">
-          <span style="padding-left:60px" class="fn-c-memo"> {{value.content}}</span>
+          <span style="padding-left:60px" class="fn-c-memo"> {{item.productName}}</span>
+          <span style="padding-left:20px" class="fn-c-memo"> {{item.count}}</span>
         </div>
       </div>
       <div class="order_state fn-13">
-        ￥19.00
+        ￥{{parseFloat(parseFloat(item.normalprice)*item.count).toFixed(2)}}
       </div>
     </div>
-    <div class="row fw-2" style="justify-content: flex-end;">
-      <mt-button class="fw-4" style="margin-right:10px;height:30px" plain size="small" type="primary">再来一单</mt-button>
-      <mt-button class="fw-4" style="margin-right:10px;height:30px" plain size="small" type="danger">评价得190积分</mt-button>
-    </div>
+    <!--<div class="row fw-2" style="justify-content: flex-end;">-->
+      <!--<mt-button class="fw-4" style="margin-right:10px;height:30px" plain size="small" type="primary">再来一单</mt-button>-->
+      <!--<mt-button class="fw-4" style="margin-right:10px;height:30px" plain size="small" type="danger">评价得190积分</mt-button>-->
+    <!--</div>-->
   </section>
 </template>
 

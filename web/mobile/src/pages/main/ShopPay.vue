@@ -64,7 +64,7 @@
 		<div slot="footer">
 			<div class="pay_footer">
 				<div class="left primary_bg_gray">￥{{ this.$route.query.totalPrice }}</div>
-				<div class="right">去支付</div>
+				<div class="right" @click="pay(list)">去支付</div>
 			</div>
 		</div>
 	</page>
@@ -90,6 +90,9 @@ export default {
     },
     choose() {
       console.log(1);
+    },
+    pay(item){
+      this.GLOBAL.orderList.push(item)
     }
   },
   created() {

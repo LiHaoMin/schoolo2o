@@ -88,11 +88,7 @@
 						img: "static/img/mine/heat.png"
 					}
 				],
-				list_two: [{
-						title: "推荐有奖",
-						text: "5元现金",
-						img: "static/img/mine/gift.png"
-					},
+				list_two: [
 					{
 						title: "积分商城",
 						text: "0元好物在这里",
@@ -102,16 +98,6 @@
 						title: "每日精选",
 						text: "全场包邮一元起",
 						img: "static/img/mine/xing.png"
-					},
-					{
-						title: "饿了么联名卡",
-						text: "免费领超级会员",
-						img: "static/img/mine/bank card.png"
-					},
-					{
-						title: "免费流量",
-						text: "每月最高500m",
-						img: "static/img/mine/phone.png"
 					}
 				],
 				list_three: [{
