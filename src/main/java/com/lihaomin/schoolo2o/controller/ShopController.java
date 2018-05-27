@@ -25,8 +25,8 @@ public class ShopController {
     }
 
     @RequestMapping("/list2")
-    public RequestResult<List<Shop>> list2(){
-        List<Shop> shops = shopService.list2();
+    public RequestResult<List<Shop>> list2(@RequestParam(value = "catId",required = false) int catId){
+        List<Shop> shops = shopService.list2(catId);
         return new RequestResult<>(shops);
     }
 

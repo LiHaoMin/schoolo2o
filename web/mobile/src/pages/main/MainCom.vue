@@ -19,7 +19,7 @@
           <mt-swipe-item v-for="(item,index) in menuList" :key="index">
             <div class="row">
               <div class="col col_item" v-for="(it,index1) in item" :key="index1">
-                <div>
+                <div @click="go({name:'shopCat',query:{catId:it.id,catName:it.categoryName}})">
                   <lazy-image :src="it.categoryImage" :img-class="['detailImg']" :placeholder="loaddingImg" />
                 </div>
                 <span>{{it.categoryName}}</span>

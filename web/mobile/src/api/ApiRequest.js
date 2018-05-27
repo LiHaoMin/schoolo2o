@@ -34,3 +34,10 @@ export function getproduct(id) {
     method: 'get'
   })
 }
+
+export function getCatid(id) {
+  return request({
+    url: '/shop/list2?catId='+id,
+    method: 'get'
+  })
+}

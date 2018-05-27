@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ShopService {
     Page<Shop> list(int page);
-    List<Shop> list2();
+    List<Shop> list2(Integer catId);
     boolean delete(List<Integer> ids);
     boolean save(Shop shop);
     Shop get(int id);

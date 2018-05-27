@@ -28,9 +28,12 @@ public class ShopServiceImpl implements ShopService{
     }
 
     @Override
-    public List<Shop> list2() {
+    public List<Shop> list2(Integer catId) {
         ShopExample example = new ShopExample();
-        example.createCriteria().andStatusEqualTo(1);
+        ShopExample.Criteria criteria = example.createCriteria();
+        criteria.andStatusEqualTo(1);
+        if(catId != null)
+            criteria.andShopCategoryIdEqualTo(catId);
         example.setOrderByClause("priority desc");
         List<Shop> shops = shopMapper.selectByExample(example);
         return shops;

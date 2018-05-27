@@ -3,6 +3,7 @@ const main = r => require.ensure([], () => r(require('../pages/main/Main.vue')),
 const shopList = r => require.ensure([], () => r(require('../pages/main/ShopList.vue')), 'ShopList');
 const shopDetail = r => require.ensure([], () => r(require('../pages/main/ShopDetail.vue')), 'ShopDetail');
 const shopPay = r => require.ensure([], () => r(require('../pages/main/ShopPay.vue')), 'ShopPay');
+const shopCat = r => require.ensure([], () => r(require('../pages/main/shopCat.vue')), 'shopCat');
 
 // 例子首页
 export default [{
@@ -26,6 +27,14 @@ export default [{
   name: 'shopPay',
   path: 'shopPay',
   component: shopPay,
+  meta: {
+    hasFooter: false,
+    noScroll: false
+  }
+}, {
+  name: 'shopCat',
+  path: 'shopCat',
+  component: shopCat,
   meta: {
     hasFooter: false,
     noScroll: false
